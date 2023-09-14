@@ -14,7 +14,11 @@
 #ifndef BUZZER_INTERFACE_H
 #define BUZZER_INTERFACE_H
 
+void HBUZZER_voidTurnOn(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN);
 
+void HBUZZER_voidTurnOff(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN);
+
+void HBUZZER_voidToggle(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN, uint16_t Copy_u8Delay);
 
 #endif
 /********************************************************************************************/

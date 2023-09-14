@@ -27,8 +27,39 @@
 #include "BUZZER_config.h"
 
 
+void HBUZZER_voidTurnOn(u8 Copy_u8PORT , u8 Copy_u8PIN)
+{
+	/*SET PORT, PIN && MODE*/
+	MGPIO_u8SetPinDirection(Copy_u8PORT , Copy_u8PIN , GPIO_OUTPUT_SPEED_10MHZ_PP);
+
+	/*SET PIN HIGH*/
+	MGPIO_u8SetPinValue(Copy_u8PORT , Copy_u8PIN , GPIO_HIGH);
+}
 
 
+void HBUZZER_voidTurnOff(u8 Copy_u8PORT , u8 Copy_u8PIN)
+{
+	/*SET PORT, PIN && MODE*/
+	MGPIO_u8SetPinDirection(Copy_u8PORT , Copy_u8PIN , GPIO_OUTPUT_SPEED_10MHZ_PP);
+
+	/*SET PIN LOW*/
+	MGPIO_u8SetPinValue(Copy_u8PORT , Copy_u8PIN , GPIO_LOW);
+}
+
+void HBUZZER_voidToggle(u8 Copy_u8PORT , u8 Copy_u8PIN, u16 Copy_u8Delay)
+{
+	/* Turn on BUZZER */
+	HBUZZER_voidTurnOn(Copy_u8PORT , Copy_u8PIN);
+
+	/* Wait for delay */
+	MSTK_voidSetBusyWaitInMilliSec(Copy_u8Delay);
+
+	/* Turn off BUZZER */
+	HBUZZER_voidTurnOff(Copy_u8PORT , Copy_u8PIN);
+
+	/* Wait for delay */
+	MSTK_voidSetBusyWaitInMilliSec(Copy_u8Delay);
+}
 
 /********************************************************************************************/
 /*   END OF FILE: BUZZER_program.c                                                             */
