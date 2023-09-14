@@ -14,7 +14,7 @@
 #ifndef SCB_PRIVATE_H
 #define SCB_PRIVATE_H
 
-
+#define VECTKEY		0x05FA
 
 #endif
 /********************************************************************************************/
