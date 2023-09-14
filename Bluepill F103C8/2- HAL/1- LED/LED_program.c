@@ -27,7 +27,7 @@
 #include "LED_config.h"
 
 
-void HLED_voidTurnOn(u8 Copy_u8PORT , u8 Copy_u8PIN)
+void HLED_voidTurnOn(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN)
 {
 	/*SET PORT, PIN && MODE*/
 	MGPIO_u8SetPinDirection(Copy_u8PORT , Copy_u8PIN , GPIO_OUTPUT_SPEED_10MHZ_PP);
@@ -37,7 +37,7 @@ void HLED_voidTurnOn(u8 Copy_u8PORT , u8 Copy_u8PIN)
 }
 
 
-void HLED_voidTurnOff(u8 Copy_u8PORT , u8 Copy_u8PIN)
+void HLED_voidTurnOff(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN)
 {
 	/*SET PORT, PIN && MODE*/
 	MGPIO_u8SetPinDirection(Copy_u8PORT , Copy_u8PIN , GPIO_OUTPUT_SPEED_10MHZ_PP);
@@ -46,7 +46,7 @@ void HLED_voidTurnOff(u8 Copy_u8PORT , u8 Copy_u8PIN)
 	MGPIO_u8SetPinValue(Copy_u8PORT , Copy_u8PIN , GPIO_LOW);
 }
 
-void HLED_voidToggle(u8 Copy_u8PORT , u8 Copy_u8PIN, u16 Copy_u8Delay)
+void HLED_voidToggle(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN, uint16_t  Copy_u8Delay)
 {
 	/* Turn on Led */
 	HLED_voidTurnOn(Copy_u8PORT , Copy_u8PIN);
