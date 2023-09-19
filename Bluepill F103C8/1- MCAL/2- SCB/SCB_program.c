@@ -11,7 +11,7 @@
 /********************************************************************************************/
 /* Include libraries                                                                        */
 /********************************************************************************************/
-#include "BIT_MATH.h"
+#include "STM32F103xx.h"
 
 /********************************************************************************************/
 /* Include Component Files                                                                  */
@@ -20,7 +20,18 @@
 #include "SCB_private.h"
 #include "SCB_config.h"
 
+void SCB_vSetPriorityCfg(SCB_GroupPriorityCfg copy_eGroupPriorityCfg)
+{
+	SCB->SCB_AIRCR= VECTKEY<<16 | copy_eGroupPriorityCfg << 8;
+}
 
+void SCB_vSetInterruptPriority(SCB_Interrupt_t copy_eInterrupt,uint8_t copy_u8Priority)
+{
+	if (copy_eInterrupt<0)
+	{
+		SCB->SCB_SHPR[copy_eInterrupt+12] = copy_u8Priority << 4;
+	}
+}
 
 
 

@@ -14,11 +14,11 @@
 #ifndef LED_INTERFACE_H
 #define LED_INTERFACE_H
 
-void HLED_voidTurnOn(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN);
+void LED_voidTurnOn(PinConfig_t * LED);
 
-void HLED_voidTurnOff(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN);
+void LED_voidTurnOff(PinConfig_t * LED);
 
-void HLED_voidToggle(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN, uint16_t Copy_u8Delay);
+void LED_voidToggle(PinConfig_t * LED , uint16_t  Copy_u8Delay);
 
 
 #endif
