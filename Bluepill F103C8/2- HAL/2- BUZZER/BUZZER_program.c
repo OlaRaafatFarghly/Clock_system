@@ -11,14 +11,14 @@
 /********************************************************************************************/
 /* Include libraries                                                                        */
 /********************************************************************************************/
-#include "BIT_MATH.h"
 #include <stdint.h>
+#include <stdio.h>
 
 /********************************************************************************************/
 /* Include Interface Files in MCAL                                                          */
 /********************************************************************************************/
 #include "GPIO_interface.h"
-#include "STK_interface.h"
+#include "SysTick_interface.h"
 
 /********************************************************************************************/
 /* Include Component Files                                                                  */
@@ -28,38 +28,48 @@
 #include "BUZZER_config.h"
 
 
-void HBUZZER_voidTurnOn(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN)
+void BUZZER_voidTurnOn(PinConfig_t * BUZZER)
 {
-	/*SET PORT, PIN && MODE*/
-	MGPIO_u8SetPinDirection(Copy_u8PORT , Copy_u8PIN , GPIO_OUTPUT_SPEED_10MHZ_PP);
+	if (NULL != BUZZER)
+	{
+		GPIO_u8PinInit(BUZZER);
 
-	/*SET PIN HIGH*/
-	MGPIO_u8SetPinValue(Copy_u8PORT , Copy_u8PIN , GPIO_HIGH);
+		GPIO_vSetOutputPinValue(BUZZER->PIN_Port, BUZZER->PIN_Number, OUTPUT_HIGH);
+	}
+	else
+	{
+		/* Do Nothing */
+	}
 }
 
 
-void HBUZZER_voidTurnOff(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN)
+void BUZZER_voidTurnOff(PinConfig_t * BUZZER)
 {
-	/*SET PORT, PIN && MODE*/
-	MGPIO_u8SetPinDirection(Copy_u8PORT , Copy_u8PIN , GPIO_OUTPUT_SPEED_10MHZ_PP);
+	if (NULL != BUZZER)
+	{
+		GPIO_u8PinInit(BUZZER);
 
-	/*SET PIN LOW*/
-	MGPIO_u8SetPinValue(Copy_u8PORT , Copy_u8PIN , GPIO_LOW);
+		GPIO_vSetOutputPinValue(BUZZER->PIN_Port, BUZZER->PIN_Number, OUTPUT_LOW);
+	}
+	else
+	{
+		/* Do Nothing */
+	}
 }
 
-void HBUZZER_voidToggle(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN, uint16_t Copy_u8Delay)
+void BUZZER_voidToggle(PinConfig_t * BUZZER , uint16_t  Copy_u8Delay)
 {
 	/* Turn on BUZZER */
-	HBUZZER_voidTurnOn(Copy_u8PORT , Copy_u8PIN);
+	BUZZER_voidTurnOn(BUZZER);
 
 	/* Wait for delay */
-	MSTK_voidSetBusyWaitInMilliSec(Copy_u8Delay);
+	SysTick_Delay_ms(Copy_u8Delay);
 
 	/* Turn off BUZZER */
-	HBUZZER_voidTurnOff(Copy_u8PORT , Copy_u8PIN);
+	BUZZER_voidTurnOff(BUZZER);
 
 	/* Wait for delay */
-	MSTK_voidSetBusyWaitInMilliSec(Copy_u8Delay);
+	SysTick_Delay_ms(Copy_u8Delay);
 }
 
 /********************************************************************************************/

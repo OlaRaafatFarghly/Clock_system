@@ -11,14 +11,14 @@
 /********************************************************************************************/
 /* Include libraries                                                                        */
 /********************************************************************************************/
-#include "BIT_MATH.h"
 #include <stdint.h>
+#include <stdio.h>
 
 /********************************************************************************************/
 /* Include Interface Files in MCAL                                                          */
 /********************************************************************************************/
 #include "GPIO_interface.h"
-#include "STK_interface.h"
+#include "SysTick_interface.h"
 
 /********************************************************************************************/
 /* Include Component Files                                                                  */
@@ -28,38 +28,47 @@
 #include "LED_config.h"
 
 
-void HLED_voidTurnOn(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN)
+void LED_voidTurnOn(PinConfig_t * LED)
 {
-	/*SET PORT, PIN && MODE*/
-	MGPIO_u8SetPinDirection(Copy_u8PORT , Copy_u8PIN , GPIO_OUTPUT_SPEED_10MHZ_PP);
+	if (NULL != LED)
+	{
+		GPIO_u8PinInit(LED);
 
-	/*SET PIN HIGH*/
-	MGPIO_u8SetPinValue(Copy_u8PORT , Copy_u8PIN , GPIO_HIGH);
+		GPIO_vSetOutputPinValue(LED->PIN_Port, LED->PIN_Number, OUTPUT_HIGH);
+	}
+	else
+	{
+		/* Do Nothing */
+	}
 }
 
-
-void HLED_voidTurnOff(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN)
+void LED_voidTurnOff(PinConfig_t * LED)
 {
-	/*SET PORT, PIN && MODE*/
-	MGPIO_u8SetPinDirection(Copy_u8PORT , Copy_u8PIN , GPIO_OUTPUT_SPEED_10MHZ_PP);
+	if (NULL != LED)
+	{
+		GPIO_u8PinInit(LED);
 
-	/*SET PIN LOW*/
-	MGPIO_u8SetPinValue(Copy_u8PORT , Copy_u8PIN , GPIO_LOW);
+		GPIO_vSetOutputPinValue(LED->PIN_Port, LED->PIN_Number, OUTPUT_LOW);
+	}
+	else
+	{
+		/* Do Nothing */
+	}
 }
 
-void HLED_voidToggle(uint8_t Copy_u8PORT , uint8_t Copy_u8PIN, uint16_t  Copy_u8Delay)
+void LED_voidToggle(PinConfig_t * LED, uint16_t Copy_u8Delay)
 {
 	/* Turn on Led */
-	HLED_voidTurnOn(Copy_u8PORT , Copy_u8PIN);
+	LED_voidTurnOn(LED);
 
 	/* Wait for delay */
-	MSTK_voidSetBusyWaitInMilliSec(Copy_u8Delay);
+	SysTick_Delay_ms(Copy_u8Delay);
 
 	/* Turn off led */
-	HLED_voidTurnOff(Copy_u8PORT , Copy_u8PIN);
+	LED_voidTurnOff(LED);
 
 	/* Wait for delay */
-	MSTK_voidSetBusyWaitInMilliSec(Copy_u8Delay);
+	SysTick_Delay_ms(Copy_u8Delay);
 }
 
 
