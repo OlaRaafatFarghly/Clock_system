@@ -12,9 +12,9 @@
 #include "Utils.h"
 #include "stdio.h"
 /******************************* Various Memories Base Addresses 	*******************************/
-#define FLASH_BASE_ADDRESS	0x0UL 
-#define SRAM_BASE_ADDRESS 	0x0UL 
-#define ROM_BASE_ADDRESS 	0x0UL 
+#define FLASH_BASE_ADDRESS	0x08000000UL
+#define SRAM_BASE_ADDRESS 	0x20000000UL
+#define ROM_BASE_ADDRESS 	0x1FFF0000UL
 
 /******************************* Core peripheral Base Addresses 	*******************************/
 #define SysTick_BASE_ADDRESS 	0xE000E010UL
@@ -138,7 +138,7 @@ typedef struct{
 
 /******************************* GPIO Peripheral Definitions 		 *******************************/
 
-#define GPIOA       	   ((GPIO_RegDef_t*)GPIOA_BASE_ADDRESS)
+#define GPIOA       	  ((GPIO_RegDef_t*)GPIOA_BASE_ADDRESS)
 #define GPIOB             ((GPIO_RegDef_t*)GPIOB_BASE_ADDRESS)
 #define GPIOC             ((GPIO_RegDef_t*)GPIOC_BASE_ADDRESS)
 #define GPIOD             ((GPIO_RegDef_t*)GPIOD_BASE_ADDRESS)

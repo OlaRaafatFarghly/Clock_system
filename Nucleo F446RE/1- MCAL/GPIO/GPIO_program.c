@@ -14,7 +14,7 @@
 #include <stdint.h>
 
 #include "Stm32F466xx.h"
-#include "ErrType.h"
+#include "Error_type.h"
 #include "Utils.h"
 
 /********************************************************************************************/
