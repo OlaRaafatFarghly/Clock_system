@@ -33,27 +33,34 @@
 #define GPIOG_BASE_ADDRESS 				0x40021800UL
 #define GPIOH_BASE_ADDRESS 				0x40021C00UL
 
-#define RCC_BASE_ADDRESS    0x40023800UL 
+#define RCC_BASE_ADDRESS    0x40023800UL
 
-#define DMA1_BASE_ADDRESS   0x40026000UL 
-#define DMA2_BASE_ADDRESS   0x40026400UL 
+#define DMA_BASE_ADDRESS    0x40026000UL
+#define DMA1_BASE_ADDRESS   0x40026000UL
+#define DMA2_BASE_ADDRESS   0x40026400UL
 
 
 /**************************************** AHB2 Peripheral Base Addresses **********************/
+
+#define EXTI_BASE_ADDRESS   0x40013C00UL
+#define SYSCFG_BASE_ADDRESS 0x40013800UL
 
 
 /**************************************** AHB3 Peripheral Base Addresses **********************/
 
 /**************************************** APB1 Peripheral Base Addresses **********************/
-#define UART4_BASE_ADDRESS  0x40004C00UL
-#define UART5_BASE_ADDRESS  0x40005000UL
+
 #define USART2_BASE_ADDRESS 0x40004400UL
 #define USART3_BASE_ADDRESS 0x40004800UL
 
+#define UART4_BASE_ADDRESS  0x40004C00UL
+#define UART5_BASE_ADDRESS  0x40005000UL
 
+#define SPI_BASE_ADRESS     0x40013000UL
 #define SPI2_BASE_ADDRESS 	0x40003800UL
 #define SPI3_BASE_ADDRESS 	0x40003C00UL
 
+#define I2C_BASE_ADRESS     0x40005400UL
 #define I2C1_BASE_ADDRESS 	0x40005400UL
 #define I2C2_BASE_ADDRESS 	0x40005800UL
 #define I2C3_BASE_ADDRESS 	0x40005C00UL
@@ -112,6 +119,10 @@ typedef struct {
 	uint32_t RESERVED6[2];        /* Reserved */
 	volatile uint32_t SSCGR;      /* Spread spectrum clock generation register */
 	volatile uint32_t PLLI2SCFGR; /* PLLI2S configuration register */
+	volatile uint32_t PLLSAICFGR;
+	volatile uint32_t DCKCFGR;
+	volatile uint32_t CKGATENR;
+	volatile uint32_t DCKCFGR2;
 } RCC_RegDef_t;
 
 /******************************* STK Register Definition Structure *******************************/
@@ -161,7 +172,7 @@ typedef struct{
 	uint32_t EXTI_RTSR;
 	uint32_t EXTI_FTSR;
 	uint32_t EXTI_SWIER;
-	uint32_t EXTI_PR;	
+	uint32_t EXTI_PR;
 }EXTI_RegDef_t;
 
 /******************************* EXTI Register Definition Structure *******************************/
@@ -182,7 +193,7 @@ typedef struct{
 	uint32_t DMA_SxPAR;
 	uint32_t DMA_SxM0AR;
 	uint32_t DMA_SxM1AR;
-	uint32_t DMA_SxFCR;	
+	uint32_t DMA_SxFCR;
 }STREAM_RegDef_t;
 
 typedef struct{
@@ -192,6 +203,91 @@ typedef struct{
 	uint32_t DMA_HIFCR;
 	STREAM_RegDef_t DMA_STREAM[7];
 }DMA_RegDef_t;
+
+/***************************         USART Register Definition Structure   ***************/
+
+typedef struct
+{
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t BRR;
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t CR3;
+	volatile uint32_t GTPR;
+
+}USART_RegDef_t;
+
+typedef struct
+{
+	USART_RegDef_t USART2;
+	uint8_t space1[0x3E4];        // 400 - (size of last struct which is 7 elements in 4 bytes = 0x3E4)
+	USART_RegDef_t USART3;
+	uint8_t space2[0x3E4];
+	USART_RegDef_t UART4;
+	uint8_t space3[0x3E4];
+	USART_RegDef_t UART5;
+	uint8_t space4[0xCC00];
+	USART_RegDef_t USART1;
+	uint8_t space5[0x3E4];
+	USART_RegDef_t USART6;
+}USART_Peripheral_t;
+
+/***************************         SPI Peripheral Definitions   ***************/
+
+typedef struct
+{
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t CRCPR;
+	volatile uint32_t RXCRCR;
+	volatile uint32_t TXCRCR;
+	volatile uint32_t I2SCFGR;
+	volatile uint32_t I2SPR;
+
+}SPI_RegDef_t;
+
+typedef struct
+{
+	SPI_RegDef_t SPI1;
+	uint8_t RESERVED1[0x3DC];        // 400 - (size of last struct which is 9 elements in 4 bytes = 0x3DC)
+	SPI_RegDef_t SPI4;
+	uint8_t RESERVED2[0x3DC];
+	SPI_RegDef_t SPI2_I2S2;
+	uint8_t RESERVED3[0x3DC];
+	SPI_RegDef_t SPI3_I2S3;
+}SPI_Peripheral_t;
+
+/***************************         I2C Peripheral Definitions   ***************/
+
+
+typedef struct
+{
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t OAR1;
+	volatile uint32_t OAR2;
+	volatile uint32_t DR;
+	volatile uint32_t SR1;
+	volatile uint32_t SR2;
+	volatile uint32_t CCR;
+	volatile uint32_t TRISE;
+	volatile uint32_t FLTR;
+
+}I2C_RegDef_t;
+
+typedef struct
+{
+	I2C_RegDef_t I2C1;
+	uint8_t RESERVED1[0x3DE];        // 400 - (size of last struct which is 10 elements in 4 bytes = 0x3DC)
+	I2C_RegDef_t I2C2;
+	uint8_t RESERVED2[0x3DE];
+	I2C_RegDef_t I2C3;
+
+}I2C_Peripheral_t;
+
 
 /******************************* GPIO Peripheral Definitions 		 *******************************/
  #define GPIOA       	   ((GPIO_RegDef_t*)GPIOA_BASE_ADDRESS)
@@ -220,10 +316,20 @@ typedef struct{
 
 /******************************* SYSCFG Peripheral Definitions 		 *******************************/
 #define  SYSCFG  	 	   ((SYSCFG_RegDef_t*)SYSCFG_BASE_ADDRESS)
-	
+
 /******************************* DMA Peripheral Definitions 		 *******************************/
 #define  DMA1  	  	  	   ((DMA_RegDef_t*)DMA1_BASE_ADDRESS)
 #define  DMA2  	      	   ((DMA_RegDef_t*)DMA2_BASE_ADDRESS)
+
+
+/******************************* USART Peripheral Definitions        ******************************/
+#define USART              ((USART_Peripheral_t*)USART2_BASE_ADDRESS)
+
+/******************************* SPI Peripheral Definitions          ******************************/
+#define SPI               ((SPI_Peripheral_t*)SPI_BASE_ADRESS)
+
+/*******************************  I2C Peripheral Definitions         ******************************/
+#define I2C               ((I2C_Peripheral_t*)I2C_BASE_ADRESS)
 
 #endif
 /********************************************************************************************/

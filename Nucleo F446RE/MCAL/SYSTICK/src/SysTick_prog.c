@@ -1,17 +1,15 @@
 
 #include <stdint.h>
-
-
 #include "BIT_Math.h"
-#include "STM32F103xx.h"
+#include "Stm32F446xx.h"
 #include "../inc/STK_interface.h"
 
 
-/* this functions work for SYSCLK with 8MHZ and AHB prescaler 8 */
+/* this functions work for SYSCLK with 16MHZ internal clock */
 uint8_t STK_Delay_us(uint16_t time_us)
 {
 	CLEAR_BIT(STK->STK_CTRL, ENABLE);  /* make sure timer is OFF */
-	STK->STK_LOAD = time_us-1;
+	STK->STK_LOAD = 2*(time_us) -1;     /* */
 
 	CLEAR_BIT(STK->STK_CTRL, CLKSOURCE); /* CLOCK SOURSE SELECTED AHB/8  */
 
@@ -23,9 +21,8 @@ uint8_t STK_Delay_us(uint16_t time_us)
 }
 uint8_t STK_Delay_ms(uint16_t time_ms)
 {
-	STK->STK_LOAD = 0 ;
 	CLEAR_BIT(STK->STK_CTRL, ENABLE);  /* make sure timer is OFF */
-	STK->STK_LOAD = (time_ms*1000) - 1;
+	STK->STK_LOAD = 2*(time_ms*1000) - 1;
 
 	CLEAR_BIT(STK->STK_CTRL, CLKSOURCE); /* CLOCK SOURSE SELECTED AHB/8  */
 
