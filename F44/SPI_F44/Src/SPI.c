@@ -1,0 +1,179 @@
+/*
+ * SPI.c
+ *
+ *  Created on: Sep 13, 2023
+ *      Author: Ahmed
+ */
+
+
+#include "SPI.h"
+
+SPI_Reg_t * SPI[4]={(SPI_Reg_t*)SPI1_Base_Address,(SPI_Reg_t*)SPI2_Base_Address,(SPI_Reg_t*)SPI3_Base_Address,(SPI_Reg_t*)SPI4_Base_Address};
+
+uint32_t * dest_ptr=NULL;
+
+
+Err_Status SPI_Init(SPI_Handle_t*SPI_handle){
+
+	Err_Status err=OK;
+	if(SPI_handle!=NULL){
+
+		SPI[SPI_handle->SPI_Number]->CR1|=SPI_handle->SPI_En;// Enable
+
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->Duplex)<<15;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->One_Direction_Mode)<<14;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->CRC)<<13;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->Frame_Size)<<11;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->Recieve_Only)<<10;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->SW_Slave_Managament)<<9;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->Master_Slave)<<2;
+
+		SPI[SPI_handle->SPI_Number]->CR2|=SPI_handle->TXEIE<<7;
+		SPI[SPI_handle->SPI_Number]->CR2|=SPI_handle->RXNEIE<<6;
+
+	}
+	else err=NOK;
+
+
+
+
+
+	return err;
+}
+
+
+
+Err_Status SPI_Send_Data_IT(SPI_Handle_t*SPI_handle,uint32_t Data){
+	Err_Status err=OK;
+		if(SPI_handle!=NULL){
+
+
+	SPI[SPI_handle->SPI_Number]->DR=Data;
+		}
+
+		return err;
+
+}
+
+
+Err_Status SPI_Send_Data_DMA(SPI_Handle_t*SPI_handle,uint32_t Data){
+	Err_Status err=OK;
+
+   if(SPI_handle!=NULL){
+
+
+	SPI[SPI_handle->SPI_Number]->CR2|=(0b10);
+
+	SPI[SPI_handle->SPI_Number]->DR=Data;
+		}
+		else err=NOK;
+
+	return err;
+
+}
+
+
+Err_Status SPI_Recieve_Data_DMA(SPI_Handle_t*SPI_handle,uint32_t*Destination){
+
+	Err_Status err=OK;
+
+	if(SPI_handle!=NULL){
+
+	SPI[SPI_handle->SPI_Number]->CR2|=(0b1)<<6;
+
+	SPI[SPI_handle->SPI_Number]->CR2|=(0b1);
+
+	dest_ptr=Destination;
+
+	}
+
+	else err=NOK;
+
+	return err;
+
+}
+
+
+Err_Status SPI_Recieve_Data_IT(SPI_Handle_t*SPI_handle,uint32_t*Destination){
+
+	Err_Status err=OK;
+
+	if(SPI_handle!=NULL){
+
+
+	SPI[SPI_handle->SPI_Number]->CR2|=(0b1)<<7;
+
+	dest_ptr=Destination;
+
+	}
+
+	else err=NOK;
+
+	return err;
+
+}
+
+void SPI_RX_IRQ_Handler(uint8_t Num){
+
+	if(dest_ptr!=NULL){
+	*dest_ptr=SPI[Num]->DR;
+	}
+
+
+
+}
+
+void DMA2_Stream2_IRQHandler(void){//1RX
+
+	if(dest_ptr!=NULL){
+
+	*dest_ptr=SPI[1]->DR;
+
+	}
+
+}
+void DMA2_Stream3_IRQHandler(void){ // 1TX
+
+
+
+
+}
+
+void DMA1_Stream3_IRQHandler(void){// 2RX
+	if(dest_ptr!=NULL){
+
+	*dest_ptr=SPI[2]->DR;
+
+	}
+
+}
+
+void DMA1_Stream4_IRQHandler(void){// 2TX
+
+
+
+
+}
+
+void DMA1_Stream7_IRQHandler(void){// 3TX
+
+
+
+
+}
+
+void DMA1_Stream2_IRQHandler(void){// 3RX
+	if(dest_ptr!=NULL){
+
+	*dest_ptr=SPI[3]->DR;
+	}
+
+
+}
+
+
+
+
+
+
+
