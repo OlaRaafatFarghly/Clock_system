@@ -28,7 +28,9 @@
 
 /******************************* APB1 peripheral Base Addresses	 	*******************************/
 
-
+#define SPI2_Base_Address 0x40003800
+#define SPI3_Base_Address 0x40003C00
+#define SPI4_Base_Address 0x40013400
 
 /******************************* APB2 peripheral Base Addresses 	*******************************/
 #define GPIOA_BASE_ADDRESS 	0x40010800UL 
@@ -41,6 +43,9 @@
 
 #define EXTI_BASE_ADDRESS 	0x40010400UL
 #define AFIO_BASE_ADDRESS 	0x40010000UL
+
+
+#define SPI1_Base_Address 0x40013000
 
 
 /******************************* GPIO Register Definition Structure *******************************/
@@ -136,6 +141,40 @@ typedef struct{
 	volatile uint32_t AFIO_EXTICR[4] ;
 }AFIO_RegDef_t;
 
+/******************************* SPI Register Definition Structure *******************************/
+
+typedef struct {
+
+	uint32_t CR1;
+	uint32_t CR2;
+	uint32_t SR;
+	uint32_t DR;
+	uint32_t CRCPR;
+	uint32_t RXCRCR;
+	uint32_t TXCRCR;
+	uint32_t I2SCFGR;
+	uint32_t I2SPR;
+}SPI_RegDef_t;
+
+/******************************* SCB Register Definition Structure *******************************/
+
+typedef struct {
+	uint32_t CPUID;
+	uint32_t ICSR;
+	uint32_t VTOR;
+	uint32_t AIRCR;
+	uint32_t SCR;
+	uint32_t CCR;
+	uint32_t SHPR1;
+	uint32_t SHPR2;
+	uint32_t SHPR3;
+	uint32_t SHCRS;
+	uint32_t CFSR;
+	uint32_t HFSR;
+	uint32_t rev;
+	uint32_t MMAR;
+	uint32_t BFAR;
+}SCB_regDef_t;
 /******************************* GPIO Peripheral Definitions 		 *******************************/
 
 #define GPIOA       	  ((GPIO_RegDef_t*)GPIOA_BASE_ADDRESS)
@@ -160,5 +199,10 @@ typedef struct{
 #define EXTI  		   ((EXTI_RegDef_t*)EXTI_BASE_ADDRESS)
 /******************************* EXTI Peripheral Definitions 		 *******************************/
 #define AFIO  		   ((AFIO_RegDef_t*)AFIO_BASE_ADDRESS)
+/******************************* SPI Peripheral Definitions 		 *******************************/
+#define SPI  		   ((SPI_RegDef_t*)SPI1_Base_Address)
+/******************************* SCB Peripheral Definitions 		 *******************************/
+#define SCB  		   ((SCB_regDef_t*)SCB_BASE_ADDRESS)
+
 
 #endif
