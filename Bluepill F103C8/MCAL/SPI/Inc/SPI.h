@@ -40,7 +40,6 @@ typedef struct {
 	uint8_t baud;
 	Master_Slave_t Master_Slave;
 	En_t SS_En;
-
 	En_t CRC;
 
 }SPI_Handle_t;

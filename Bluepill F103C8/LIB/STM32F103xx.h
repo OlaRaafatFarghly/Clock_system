@@ -10,7 +10,7 @@
 #ifndef STM32F103XX_H
 #define STM32F103XX_H
 #include "Utils.h"
-#include "stdio.h"
+
 /******************************* Various Memories Base Addresses 	*******************************/
 #define FLASH_BASE_ADDRESS	0x08000000UL
 #define SRAM_BASE_ADDRESS 	0x20000000UL
@@ -99,7 +99,7 @@ typedef struct{
 	volatile uint32_t Reserved3[30];
 	volatile uint32_t NVIC_IABR[3];
 	volatile uint32_t Reserved4[30];
-	volatile uint8_t NVIC_IPR [84];
+	volatile uint8_t  NVIC_IPR[84];
 	volatile uint32_t Reserved5[695];
 	volatile uint32_t NVIC_STIR;
 
