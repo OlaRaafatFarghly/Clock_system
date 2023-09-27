@@ -23,7 +23,7 @@
 /* Includes */
 #include <sys/stat.h>
 #include <stdlib.h>
-#include <errno.h>
+#include <Error_type.h>
 #include <stdio.h>
 #include <signal.h>
 #include <time.h>
