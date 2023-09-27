@@ -8,11 +8,9 @@
 #ifndef I2C_H_
 #define I2C_H_
 
-#include "stm32f446re.h"
-#include "Error.h"
-#include "i2c_priv.h"
-
-#include <stdint.h>
+#include "../../LIB/Error_type.h"
+#include "../../I2C/Inc/i2c_priv.h"
+#include "../../I2C/Inc/stm32f446re.h"
 
 typedef struct i2c{
 	uint32_t CR1;

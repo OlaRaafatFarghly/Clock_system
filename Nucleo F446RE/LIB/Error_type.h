@@ -42,6 +42,11 @@
 
 #define OUT_OF_RANGE                         32u
 
+#define start_error     			         33u
+#define Null_Ptr         			         34u
+#define NACK_err            	             35u
+#define NAddress                             36u
+#define NData                                37u
 
 
 #endif

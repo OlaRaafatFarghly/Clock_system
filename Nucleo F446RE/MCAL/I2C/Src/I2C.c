@@ -6,9 +6,8 @@
  */
 
 
-#include "I2C.h"
-#include <stdlib.h>
-#include "std_macro.h"
+#include "../../I2C/Inc/I2C.h"
+
 
 #define System_Clock 16UL
 i2c_reg_t * I2C[3]={(i2c_reg_t * )i2c1_Base_Address,(i2c_reg_t * )i2c2_Base_Address,(i2c_reg_t * )i2c3_Base_Address};

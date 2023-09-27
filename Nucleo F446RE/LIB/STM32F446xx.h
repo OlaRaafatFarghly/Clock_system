@@ -13,6 +13,7 @@
 #ifndef STM33F446xx_H_
 #define STM33F446xx_H_
 
+#define System_Clock 16000000
 /**************************************** Various Memories Base Addresses **********************/
 #define FLASH_BASE_ADDRESS    			0x08000000UL
 #define SRAM_BASE_ADDRESS				0x20000000UL
@@ -298,36 +299,25 @@ typedef struct
  #define GPIOF             ((GPIO_RegDef_t*)GPIOF_BASE_ADDRESS)
  #define GPIOG             ((GPIO_RegDef_t*)GPIOG_BASE_ADDRESS)
  #define GPIOH             ((GPIO_RegDef_t*)GPIOH_BASE_ADDRESS)
-
 /******************************* RCC Peripheral Definitions 		 *******************************/
 #define RCC       	   	   ((RCC_RegDef_t*)RCC_BASE_ADDRESS)
-
 /******************************* STK Peripheral Definitions 		 *******************************/
 #define STK  			   ((MSTK_RegDef_t*)SysTick_BASE_ADDRESS)
-
 /******************************* NVIC Peripheral Definitions 		 *******************************/
 #define NVIC  		 	   ((NVIC_RegDef_t*)NVIC_BASE_ADDRESS)
-
 /******************************* SCB Peripheral Definitions 		 *******************************/
 #define  SCB  		 	   ((SCB_RegDef_t*)SCB_BASE_ADDRESS)
-
 /******************************* EXTI Peripheral Definitions 		 *******************************/
 #define  EXTI  		 	   ((EXTI_RegDef_t*)EXTI_BASE_ADDRESS)
-
 /******************************* SYSCFG Peripheral Definitions 		 *******************************/
 #define  SYSCFG  	 	   ((SYSCFG_RegDef_t*)SYSCFG_BASE_ADDRESS)
-
 /******************************* DMA Peripheral Definitions 		 *******************************/
 #define  DMA1  	  	  	   ((DMA_RegDef_t*)DMA1_BASE_ADDRESS)
 #define  DMA2  	      	   ((DMA_RegDef_t*)DMA2_BASE_ADDRESS)
-
-
 /******************************* USART Peripheral Definitions        ******************************/
 #define USART              ((USART_Peripheral_t*)USART2_BASE_ADDRESS)
-
 /******************************* SPI Peripheral Definitions          ******************************/
 #define SPI               ((SPI_Peripheral_t*)SPI_BASE_ADRESS)
-
 /*******************************  I2C Peripheral Definitions         ******************************/
 #define I2C               ((I2C_Peripheral_t*)I2C_BASE_ADRESS)
 
