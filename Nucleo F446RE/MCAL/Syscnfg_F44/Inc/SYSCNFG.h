@@ -7,9 +7,9 @@
 
 #ifndef SYSCNFG_H_
 #define SYSCNFG_H_
-#include <stdio.h>
-#include "Error.h"
-#include <stdint.h>
+
+#include "../../LIB/Error_type.h"
+
 #define Sys_Cnfg_Base_Address 0x40013800
 
 typedef struct{

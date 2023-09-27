@@ -8,10 +8,9 @@
 #ifndef SPI_H_
 #define SPI_H_
 
-#include "stm32f446re.h"
-#include "Error.h"
-#include <stdint.h>
-#include <stdlib.h>
+#include "../../LIB/Error_type.h"
+#include "../../LIB/STM32F446xx.h"
+
 typedef enum{SPI1,SPI2,SPI3,SPI4}SPI_Number_t;
 
 typedef enum{Full_Duplex,Half_Duplex}Duplex_t;

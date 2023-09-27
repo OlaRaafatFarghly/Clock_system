@@ -6,8 +6,6 @@
  */
 #include "SysCnfg.h"
 
-#include <stdint.h>
-
 
 uint8_t SYSCFG_Set_Port(Port_t PORT,PIN_t PIN ){
 uint8_t err=OK;
