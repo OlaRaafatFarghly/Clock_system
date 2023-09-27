@@ -1,7 +1,8 @@
-#include <stdint.h>
+
 #include "rcc.h"
-#include "Error.h"
-#include "stm32f446re.h"
+#include "../../LIB/Error_type.h"
+#include "../../LIB/STM32F446xx.h"
+
 #define RCC ( (RCC_reg_t*)RCC_Base_Add   )
 
 void RCC_set_CLKStatus(CLK_Type_t CLK,Status Status){

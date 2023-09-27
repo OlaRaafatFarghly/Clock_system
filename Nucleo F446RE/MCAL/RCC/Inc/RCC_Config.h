@@ -10,13 +10,6 @@
 #ifndef RCC_config
 #define RCC_config
 
-
-
-
-
-
-
-
 typedef enum{
 
 	HSI=0,

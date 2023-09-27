@@ -12,10 +12,8 @@
 #ifndef RCC_h
 #define RCC_h
 
-#include <stdint.h>
-#include "RCC_config.h"
-#include "stm32f446re.h"
-#include "GPIO.h"
+#include "../Inc/RCC_config.h"
+#include "../../LIB/STM32F446xx.h"
 void RCC_set_CLKStatus(CLK_Type_t CLK,Status Status);
 
 void RCC_set_Sys_clk(CLK_Type_t CLK);
