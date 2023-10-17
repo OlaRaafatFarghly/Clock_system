@@ -64,22 +64,47 @@ USART[USART_Handle->USART_Type]->BRR|=Real_Part<<4;
 }
 
 
-Err_Status USART_Send_IT(UART_Handle_t*USART_Handle,uint32_t Data){
+Err_Status USART_Send_Poll(UART_Handle_t*USART_Handle,uint32_t Data){
 	Err_Status err=OK;
 
-		if(USART_Handle!=NULL){
+	if(USART_Handle!=NULL){
 
-	USART[USART_Handle->USART_Type]->DR=Data;
+		USART[USART_Handle->USART_Type]->DR=Data;
+
+		while(    ((USART[USART_Handle->USART_Type]->SR)<<7) ==0); // Poll for Data Transfer check
+		while(    ((USART[USART_Handle->USART_Type]->SR)<<6) ==0); // Poll for Transmission complete check
+
 
 		}
-		else err=NOK;
+	else err=NOK;
 
 
 
 
-		return err;
+	return err;
 
 }
+
+Err_Status USART_Send_Rec(UART_Handle_t*USART_Handle,uint32_t* Dest){
+	Err_Status err=OK;
+
+	if(USART_Handle!=NULL){
+
+		while(    ((USART[USART_Handle->USART_Type]->SR)<<5) ==0); // Poll for Data Recieve check
+		*Dest=USART[USART_Handle->USART_Type]->DR;
+
+
+
+		}
+	else err=NOK;
+
+
+
+
+	return err;
+
+}
+
 
 Err_Status USART_Send_DMA(UART_Handle_t*COPY_Handle,uint32_t data){
 
