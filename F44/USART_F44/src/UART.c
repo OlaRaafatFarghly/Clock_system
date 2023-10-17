@@ -85,7 +85,7 @@ Err_Status USART_Send_Poll(UART_Handle_t*USART_Handle,uint32_t Data){
 
 }
 
-Err_Status USART_Send_Rec(UART_Handle_t*USART_Handle,uint32_t* Dest){
+Err_Status USART_Rec_Poll(UART_Handle_t*USART_Handle,uint32_t* Dest){
 	Err_Status err=OK;
 
 	if(USART_Handle!=NULL){
