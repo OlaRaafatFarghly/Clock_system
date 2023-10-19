@@ -48,5 +48,7 @@
 #define NAddress                             36u
 #define NData                                37u
 
+Null_Ptr                                     38u
+
 
 #endif
