@@ -1,0 +1,8 @@
+"./Inc/HAL/RTC/RTC_program.o"
+"./Inc/MCAL/GPIO/GPIO_program.o"
+"./Inc/MCAL/RCC/Src/RCC_prog.o"
+"./Inc/MCAL/SYSTICK/src/SysTick_prog.o"
+"./Src/main.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Startup/startup_stm32f446retx.o"

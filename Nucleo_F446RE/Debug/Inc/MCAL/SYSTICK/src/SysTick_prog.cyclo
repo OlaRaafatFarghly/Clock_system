@@ -1,0 +1,3 @@
+SysTick_prog.c:12:9:STK_Delay_us	2
+SysTick_prog.c:25:9:STK_Delay_ms	2
+SysTick_prog.c:40:9:pulling_Delay_ms	2
