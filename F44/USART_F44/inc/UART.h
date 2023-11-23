@@ -23,7 +23,7 @@ typedef enum{RXNEIE_Interrupt_Dis,RXNEIE_Interrupt_En}RXNEIE_Interrupt_En_t;
 typedef enum{Transmit_Dis,Transmit_En}Transmit_En_t;
 typedef enum{Recieve_Dis,Recieve_En}Recieve_En_t;
 typedef enum{one,half,two,oneAndAhalf}Stop_Bit_Mode_t;
-typedef enum{Clock_En,Clock_Dis}Clock_En_t;
+typedef enum{Clock_Dis,Clock1_En}Clock_En_t;
 typedef enum{Full_Duplex,Half_Duplex}Duplex_Mode_t;
 typedef enum{USART1,USART2,USART3,USART4,USART5}USART_t;
 typedef enum{CTS_Dis,CTS_En}CTSE_t;
@@ -55,11 +55,12 @@ typedef struct {
 
 Err_Status USART_init(UART_Handle_t*);
 
-Err_Status USART_Send_IT(UART_Handle_t*,uint32_t);
+Err_Status USART_Send_Poll(UART_Handle_t*,uint32_t);
+Err_Status USART_Rec_Poll(UART_Handle_t*,uint32_t*);
 
 Err_Status USART_Send_DMA(UART_Handle_t*,uint32_t);
 
-Err_Status USART_Send_Poll(UART_Handle_t*,uint32_t);
+Err_Status USART_Send_IT(UART_Handle_t*,uint32_t);
 
 Err_Status USART_Poll_For_Transfer(UART_Handle_t*,uint32_t);
 
