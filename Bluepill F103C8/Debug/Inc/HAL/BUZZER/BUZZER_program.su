@@ -1,0 +1,3 @@
+../Inc/HAL/BUZZER/BUZZER_program.c:31:6:BUZZER_voidTurnOn	16	static
+../Inc/HAL/BUZZER/BUZZER_program.c:46:6:BUZZER_voidTurnOff	16	static
+../Inc/HAL/BUZZER/BUZZER_program.c:60:6:BUZZER_voidToggle	16	static

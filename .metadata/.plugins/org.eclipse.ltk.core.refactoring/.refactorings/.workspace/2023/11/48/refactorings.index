@@ -25,3 +25,6 @@
 1701175413107	Delete resource 'Nucleo F446RE/Inc/MCAL/USART/inc/std_macro.h'
 1701175418780	Delete resource 'Nucleo F446RE/Inc/MCAL/USART/inc/stm32f446re.h'
 1701177152231	Delete resource 'Nucleo F446RE/Inc/MCAL/EXTI/Inc/Error.h'
+1701178688077	Delete resource 'Bluepill F103C8/Inc/MCAL/RCC/Src/RCC_prog.c'
+1701196796520	Delete resource 'Bluepill F103C8/Inc/MCAL/RCC/Inc/RCC_config.h'
+1701200008199	Delete resource 'Bluepill F103C8/Inc/HAL/LCD'

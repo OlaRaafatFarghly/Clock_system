@@ -1,0 +1,4 @@
+../Inc/MCAL/GPIO/GPIO_program.c:38:9:GPIO_u8PinInit	24	static
+../Inc/MCAL/GPIO/GPIO_program.c:95:9:GPIO_vSetOutputPinValue	24	static
+../Inc/MCAL/GPIO/GPIO_program.c:126:9:GPIO_vToggleOutputPinValue	24	static
+../Inc/MCAL/GPIO/GPIO_program.c:149:9:GPIO_vReadInputPinValue	24	static

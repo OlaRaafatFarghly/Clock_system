@@ -1,0 +1,38 @@
+
+#include <stdint.h>
+
+#include "../Inc/MCAL/RCC/Inc/RCC_private.h"
+#include "../Inc/MCAL/RCC/Inc/RCC_interface.h"
+#include "../Inc/MCAL/GPIO/GPIO_private.h"
+#include "../Inc/MCAL/GPIO/GPIO_interface.h"
+
+
+int main(void)
+{
+	/*Enable clock on GPIOA*/
+	RCC_APB2_enableClock(2u);
+
+	/*Configure pinA5 as: output, Pushpull, Nopull, LowSpeed*/
+	PinConfig_t LedPin =
+	{
+			.PIN_Port = PORTA,
+			.PIN_Number = PIN5,
+			.PIN_Mode = Output_mode_max_speed_10_MHz,
+			.PIN_LCKSTS = UNLOCKED,
+			.PIN_OValue = OUTPUT_LOW,
+	};
+
+	GPIO_u8PinInit(&LedPin);
+
+	/*high on the pin to turn on the user led*/
+	while(1)
+	{
+		GPIO_u8SetPinValue(PORTA, PIN5, PIN_HIGH);
+		STK_Delay_ms(1000);
+		GPIO_u8SetPinValue(PORTA, PIN5, PIN_LOW);
+		STK_Delay_ms(1000);
+	}
+
+	/* Loop forever */
+ 	for(;;);
+}

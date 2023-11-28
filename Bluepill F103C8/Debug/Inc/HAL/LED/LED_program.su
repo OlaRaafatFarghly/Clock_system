@@ -1,0 +1,3 @@
+../Inc/HAL/LED/LED_program.c:31:6:LED_voidTurnOn	16	static
+../Inc/HAL/LED/LED_program.c:45:6:LED_voidTurnOff	16	static
+../Inc/HAL/LED/LED_program.c:59:6:LED_voidToggle	16	static

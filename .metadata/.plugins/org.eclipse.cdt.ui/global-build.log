@@ -1,7 +1,13 @@
-15:13:10 **** Incremental Build of configuration Debug for project Nucleo F446RE ****
+21:33:31 **** Incremental Build of configuration Debug for project Bluepill F103C8 ****
 make -j2 all 
-arm-none-eabi-size   Nucleo\ F446RE.elf 
+arm-none-eabi-gcc -o "Bluepill F103C8.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\Amged project\Bluepill F103C8\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Bluepill F103C8.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Bluepill F103C8.elf
+ 
+arm-none-eabi-size   Bluepill\ F103C8.elf 
+arm-none-eabi-objdump -h -S  Bluepill\ F103C8.elf  > "Bluepill F103C8.list"
    text	   data	    bss	    dec	    hex	filename
-    704	      8	   1568	   2280	    8e8	Nucleo F446RE.elf
+   1632	     36	   1564	   3232	    ca0	Bluepill F103C8.elf
 Finished building: default.size.stdout
+ 
+Finished building: Bluepill F103C8.list
  
