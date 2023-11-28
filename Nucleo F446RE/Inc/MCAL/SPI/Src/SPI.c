@@ -1,0 +1,176 @@
+/*
+ * SPI.c
+ *
+ *  Created on: Sep 13, 2023
+ *      Author: Ahmed
+ */
+
+
+#include "../Inc/SPI.h"
+
+SPI_Reg_t * SPI[4]={(SPI_Reg_t*)SPI1_Base_Address,(SPI_Reg_t*)SPI2_Base_Address,(SPI_Reg_t*)SPI3_Base_Address,(SPI_Reg_t*)SPI4_Base_Address};
+
+uint32_t * dest_ptr=NULL;
+
+
+uint32_t SPI_Init(SPI_Handle_t*SPI_handle){
+
+	uint32_t err=OK;
+	if(SPI_handle!=NULL){
+
+
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->Master_Slave)<<2;
+
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->Duplex)<<15;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->One_Direction_Mode)<<14;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->CRC)<<13;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->Frame_Size)<<11;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->Recieve_Only)<<10;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->SW_Slave_Managament)<<9;
+		SPI[SPI_handle->SPI_Number]->CR1|=(SPI_handle->SSI)<<8;
+
+
+
+		SPI[SPI_handle->SPI_Number]->CR1|=(1)<<6;// Enable
+
+	}
+	else err=NOK;
+
+
+
+
+
+	return err;
+}
+
+
+uint8_t x=0,y=0;
+
+uint32_t SPI_Send_Data_IT(SPI_Handle_t*SPI_handle,uint32_t Data){
+	uint32_t err=OK;
+		if(SPI_handle!=NULL){
+	SPI[SPI_handle->SPI_Number]->DR=Data;
+
+//	SPI[SPI_handle->SPI_Number]->CR2|=1<<7;
+
+		}
+
+		return err;
+
+}
+
+
+
+
+
+
+
+uint32_t SPI_Recieve_Data_IT(SPI_Handle_t*SPI_handle,uint32_t*Destination){
+
+	uint32_t err=OK;
+	if(SPI_handle!=NULL){
+
+
+	SPI[SPI_handle->SPI_Number]->CR2|=(0b1)<<6;
+	dest_ptr=Destination;
+
+	}
+
+	else err=NOK;
+
+	return err;
+
+}
+
+void SPI_RX_IRQ_Handler(uint8_t Num){
+
+	if(dest_ptr!=NULL){
+	*dest_ptr=SPI[Num]->DR;
+	}
+
+
+
+}
+
+void DMA2_Stream2_IRQHandler(void){//1RX
+
+	if(dest_ptr!=NULL){
+
+	*dest_ptr=SPI[1]->DR;
+
+	}
+
+}
+void DMA2_Stream3_IRQHandler(void){ // 1TX
+
+
+
+
+}
+
+void DMA1_Stream3_IRQHandler(void){// 2RX
+	if(dest_ptr!=NULL){
+
+	*dest_ptr=SPI[2]->DR;
+
+	}
+
+}
+
+void DMA1_Stream4_IRQHandler(void){// 2TX
+
+
+
+
+}
+
+void DMA1_Stream7_IRQHandler(void){// 3TX
+
+
+
+
+}
+
+void DMA1_Stream2_IRQHandler(void){// 3RX
+	if(dest_ptr!=NULL){
+
+	*dest_ptr=SPI[3]->DR;
+	}
+
+
+}
+
+#define READ_BIT(num, position) ((num >> position) & 1)
+uint32_t dr=0;
+void SPI1_IRQHandler(void){
+	dr++;
+	if (   READ_BIT(SPI[0]->SR,0)==1   ){
+		*dest_ptr=SPI[0]->DR;
+		SPI[0]->CR2&=~(1<<6);
+
+		}
+	if (  READ_BIT(SPI[0]->SR,1)==1   ){
+	SPI[0]->CR2&=~(1<<7);
+	}
+
+
+
+}
+
+void SPI2_IRQHandler(void){
+	int x=0;
+}
+
+void SPI3_IRQHandler(void){
+	int x=0;
+}
+
+void SPI4_IRQHandler(void){
+	int x=0;
+}
+
+
+
+
+
+

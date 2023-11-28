@@ -1,0 +1,10 @@
+14:47:31 **** Incremental Build of configuration Debug for project Nucleo F446RE ****
+make -j2 all 
+arm-none-eabi-size   Nucleo\ F446RE.elf 
+   text	   data	    bss	    dec	    hex	filename
+    704	      8	   1568	   2280	    8e8	Nucleo F446RE.elf
+Finished building: default.size.stdout
+ 
+
+14:47:32 Build Finished. 0 errors, 0 warnings. (took 393ms)
+

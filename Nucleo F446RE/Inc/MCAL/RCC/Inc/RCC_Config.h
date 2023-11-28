@@ -1,0 +1,94 @@
+/*
+ * RCC_Config.h
+ *
+ *  Created on: Aug 29, 2023
+ *      Author: Ahmed
+ */
+
+#ifndef RCC_CONFIG_H_
+#define RCC_CONFIG_H_
+#ifndef RCC_config
+#define RCC_config
+
+typedef enum{
+
+	HSI=0,
+	HSE,
+	PLL
+
+
+}CLK_Type_t;
+
+typedef enum{
+
+	OFF=0,
+	ON
+
+}Status;
+
+typedef enum{
+
+	Half,
+	Same
+
+}HSE_Config_t;
+
+
+
+
+
+typedef enum{
+
+	RCC_PORTA,
+	RCC_PORTB,
+	RCC_PORTC,
+	RCC_PORTD,
+	RCC_PORTE,
+	REV,
+	REV2,
+	GPIOH=7,
+	CRC=12,
+	DMA1=21,
+	DMA2
+
+
+}AHB_Prefs_t;
+
+
+
+
+typedef enum{
+
+	I2C1=21,
+	I2C2,
+	I2C3
+
+
+}APB1_Prefs_t;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif
+
+
+
+#endif /* RCC_CONFIG_H_ */
