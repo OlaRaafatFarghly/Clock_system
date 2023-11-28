@@ -8,10 +8,16 @@
 #ifndef SPI_H_
 #define SPI_H_
 
-#include "stm32f446re.h"
 #include "Error.h"
 #include <stdint.h>
 #include <stdlib.h>
+
+#define SPI1_Base_Address 0x40013000
+#define SPI2_Base_Address 0x40003800
+#define SPI3_Base_Address 0x40003C00
+#define SPI4_Base_Address 0x40013400
+
+
 typedef enum{SPI1,SPI2,SPI3,SPI4}SPI_Number_t;
 
 typedef enum{Full_Duplex,Half_Duplex}Duplex_t;
@@ -20,7 +26,7 @@ typedef enum{spi1,spi2,spi3,spi4}One_Direction_Mode_t;
 
 typedef enum{Slave,Master}Master_Slave_t;
 
-typedef enum{En,Dis}En_t;
+typedef enum{Dis,En}En_t;
 
 typedef enum{Eight_Bit,Sixteen_Bit}Frame_Size_t;
 
@@ -44,10 +50,24 @@ typedef struct {
 
 	En_t CRC;
 
+	En_t SSI;
 }SPI_Handle_t;
 
 
+typedef struct {
 
+	uint32_t CR1;
+	uint32_t CR2;
+	uint32_t SR;
+	uint32_t DR;
+	uint32_t CRCPR;
+	uint32_t RXCRCR;
+	uint32_t TXCRCR;
+	uint32_t I2SCFGR;
+	uint32_t I2SPR;
+
+
+}SPI_Reg_t;
 
 
 Err_Status SPI_Init(SPI_Handle_t*SPI_handle);
